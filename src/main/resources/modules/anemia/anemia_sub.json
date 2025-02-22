@@ -48,21 +48,16 @@
       "direct_transition": "Determine_Treatment"
     },
     "Determine_Treatment": {
-      "type": "ConditionalTransition",
-      "conditional": [
+      "type": "Guard",
+      "conditions": [
         {
-          "condition": {
-            "condition_type": "Numeric",
-            "attribute": "hemoglobin",
-            "operator": "<",
-            "value": 10
-          },
-          "transition": "Start_Iron_Therapy"
-        },
-        {
-          "transition": "No_Treatment_Needed"
+          "condition_type": "Attribute",
+          "attribute": "hemoglobin",
+          "operator": "<",
+          "value": 10
         }
-      ]
+      ],
+      "direct_transition": "Start_Iron_Therapy"
     },
     "Start_Iron_Therapy": {
       "type": "MedicationOrder",
@@ -97,19 +92,14 @@
       "direct_transition": "Check_For_Adverse_Event"
     },
     "Check_For_Adverse_Event": {
-      "type": "ConditionalTransition",
-      "conditional": [
+      "type": "Guard",
+      "conditions": [
         {
-          "condition": {
-            "condition_type": "Probability",
-            "probability": 0.1
-          },
-          "transition": "Report_Adverse_Event"
-        },
-        {
-          "transition": "Continue_Treatment"
+          "condition_type": "Probability",
+          "probability": 0.1
         }
-      ]
+      ],
+      "direct_transition": "Report_Adverse_Event"
     },
     "Report_Adverse_Event": {
       "type": "ConditionOnset",
